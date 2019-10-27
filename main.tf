@@ -72,8 +72,8 @@ data "aws_iam_policy_document" "custom" {
 
     content {
       effect    = "Allow"
-      actions   = [statement.value.actions]
-      resources = [statement.value.resources]
+      actions   = statement.value.actions
+      resources = statement.value.resources
     }
   }
 }
