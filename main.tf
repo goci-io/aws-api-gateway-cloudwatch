@@ -12,7 +12,8 @@ provider "aws" {
 }
 
 locals {
-  region = var.region == "" ? var.aws_region : var.region
+  custom_policy = length(var.custom_statements) > 0
+  region        = var.region == "" ? var.aws_region : var.region
 }
 
 module "label" {
@@ -58,8 +59,37 @@ resource "aws_iam_role" "logging" {
 }
 
 resource "aws_iam_role_policy_attachment" "allow_cloudwatch" {
+  count      = local.custom_policy ? 0 : 1
   role       = aws_iam_role.logging.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+}
+
+data "aws_iam_policy_document" "custom" {
+  count = local.custom_policy ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.custom_statements
+
+    content {
+      effect    = "Allow"
+      actions   = [statement.actions]
+      resources = [statement.resources]
+    }
+  }
+}
+
+resource "aws_iam_policy" "custom" {
+  count       = local.custom_policy ? 1 : 0
+  name        = module.role_label.id
+  path        = "/service/"
+  description = "Policy to allow API Gateway to write Logs to CloudWatch"
+  policy      = join("", data.aws_iam_policy_document.custom.*.json)
+}
+
+resource "aws_iam_role_policy_attachment" "allow_custom" {
+  count      = local.custom_policy ? 1 : 0
+  role       = aws_iam_role.logging.name
+  policy_arn = join("", aws_iam_policy.custom.*.arn)
 }
 
 resource "aws_api_gateway_account" "settings" {
