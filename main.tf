@@ -22,7 +22,7 @@ module "label" {
   delimiter  = var.delimiter
   name       = var.name
   attributes = var.attributes
-  tags       = merge(var.tags, { Region = local.region }
+  tags       = merge(var.tags, { Region = local.region })
 }
 
 module "role_label" {
