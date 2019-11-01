@@ -1,4 +1,4 @@
-# aws-api-gateway-cloudwatch
+# aws-api-gateway-settings
 
 **Maintained by [@goci-io/prp-terraform](https://github.com/orgs/goci-io/teams/prp-terraform)**
 
@@ -6,7 +6,7 @@ This module creates a new IAM service role to be used by API Gateway to write lo
 
 ```hcl
 module "apigw_settings" {
-  source     = "git::https://github.com/goci-io/aws-api-gateway-cloudwatch.git?ref=tags/<latest-version>"
+  source     = "git::https://github.com/goci-io/aws-api-gateway-settings.git?ref=tags/<latest-version>"
   namespace  = "goci"
   stage      = "staging"
   region     = "eu1"
