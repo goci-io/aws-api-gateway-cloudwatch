@@ -50,12 +50,3 @@ variable "region" {
   description = "Custom region name to use to avoid IAM naming conflicts. Defaults to aws_region"
 }
 
-variable "custom_statements" {
-  type        = list(object({
-      actions   = list(string)
-      resources = list(string)
-  }))
-  default     = []
-  description = "Custom statements for policy to grant API Gateway. If AmazonAPIGatewayPushToCloudWatchLogs is too broad for example"
-}
-
