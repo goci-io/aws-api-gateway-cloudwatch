@@ -41,12 +41,6 @@ data "aws_iam_policy_document" "trust" {
       type        = "Service"
       identifiers = ["apigateway.amazonaws.com"]
     }
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:RequestedRegion"
-      values   = [var.aws_region]
-    }
   }
 }
 
