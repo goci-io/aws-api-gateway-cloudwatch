@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 locals {
-  region        = var.region == "" ? var.aws_region : var.region
+  region = var.region == "" ? var.aws_region : var.region
 }
 
 module "label" {
