@@ -2,15 +2,6 @@ terraform {
   required_version = ">= 0.12.1"
 }
 
-provider "aws" {
-  version = "~> 2.25"
-  region  = var.aws_region
-
-  assume_role {
-    role_arn = var.aws_assume_role_arn
-  }
-}
-
 locals {
   region = var.region == "" ? var.aws_region : var.region
 }

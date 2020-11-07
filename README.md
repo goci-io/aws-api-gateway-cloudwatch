@@ -31,4 +31,3 @@ The role ARN will also be set for API Gateway Settings.
 | delimiter | Delimiter between namespace, stage, name and attributes | `-` |
 | region | Custom region name to use for labels and tags | `var.aws_region` |
 | aws_region | AWS Region to apply the account settings to | - |
-| aws_assume_role_arn | Role to assume to create resources | "" |

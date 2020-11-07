@@ -33,12 +33,6 @@ variable "delimiter" {
   description = "Delimiter to be used between `namespace`, `stage`, `name` and `attributes`"
 }
 
-variable "aws_assume_role_arn" {
-  type        = string
-  default     = ""
-  description = "The AWS Role ARN to assume to create resources"
-}
-
 variable "aws_region" {
   type        = string
   description = "The AWS region the api gateway settings apply to"
